@@ -1,5 +1,4 @@
 ﻿using Abp.Configuration;
-using Abp.Configuration.Startup;
 using Abp.Runtime.Caching.Redis.SettingManagement;
 using NSubstitute;
 using Shouldly;
@@ -20,7 +19,7 @@ namespace Abp.Zero.Redis.PerRequestRedisCache
         }
 
         [Fact]
-        public void Should_Set_Per_Request_Redis_Cache_Manager_To_Configuration()
+        public void Should_Set_Per_Request_Redis_Cache_Manager()
         {
             var isSettingManagerReplaced = _settingManager is PerRequestRedisCachedSettingManager;
             isSettingManagerReplaced.ShouldBeTrue();
