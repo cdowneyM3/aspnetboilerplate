@@ -11,11 +11,9 @@ namespace Abp.Zero.Redis.PerRequestRedisCache
     public class AbpSettingManagerWithPerRequestRedisCache_Tests : PerRequestRedisCacheTestsBase<AbpSettingManagerWithPerRequestRedisCacheModule>
     {
         private readonly ISettingManager _settingManager;
-        private readonly ISettingsConfiguration _settingConfiguration;
 
         public AbpSettingManagerWithPerRequestRedisCache_Tests()
         {
-            _settingConfiguration = LocalIocManager.Resolve<ISettingsConfiguration>();
             _settingManager = LocalIocManager.Resolve<ISettingManager>();
         }
 
