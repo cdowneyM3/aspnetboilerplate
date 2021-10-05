@@ -26,6 +26,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Abp.RedisCache\Abp.RedisCache.csproj" />
+      <ProjectReference Include="..\Abp.Zero.Common\Abp.Zero.Common.csproj" />
     </ItemGroup>
 
     <ItemGroup>
