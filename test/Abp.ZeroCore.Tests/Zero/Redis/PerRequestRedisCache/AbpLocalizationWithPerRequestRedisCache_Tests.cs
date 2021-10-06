@@ -1,4 +1,5 @@
-﻿using Abp.Localization;
+﻿using System.Globalization;
+using Abp.Localization;
 using Abp.Localization.Dictionaries;
 using Abp.Runtime.Caching.Redis.Localization;
 using NSubstitute;
@@ -16,10 +17,13 @@ namespace Abp.Zero.Redis.PerRequestRedisCache
         public AbpLocalizationWithPerRequestRedisCache_Tests()
         {
             _applicationLanguageManager = LocalIocManager.Resolve<IApplicationLanguageManager>();
+            
+            var internalDic = Substitute.For<ILocalizationDictionary>();
+            internalDic.CultureInfo.Returns(new CultureInfo("en"));
             _multiTenantLocalizationDictionary = LocalIocManager.Resolve<IMultiTenantLocalizationDictionary>(new
             {
                 sourceName = AbpConsts.LocalizationSourceName,
-                internalDictionary = Substitute.For<ILocalizationDictionary>()
+                internalDictionary = internalDic
             });
         }
 
@@ -38,6 +42,8 @@ namespace Abp.Zero.Redis.PerRequestRedisCache
         [Fact]
         public void Should_Multi_Tenant_Localization_Dictionary_Request_Once_For_Same_Context()
         {
+            RedisDatabase.ClearReceivedCalls();
+            
             ChangeHttpContext();
             
             var allStrings = _multiTenantLocalizationDictionary.GetAllStrings(null);
@@ -49,6 +55,8 @@ namespace Abp.Zero.Redis.PerRequestRedisCache
         [Fact]
         public void Should_Multi_Tenant_Localization_Dictionary_Request_Again_If_Context_Changed()
         {
+            RedisDatabase.ClearReceivedCalls();
+            
             ChangeHttpContext();
             var allStrings = _multiTenantLocalizationDictionary.GetAllStrings(null);
 
@@ -64,6 +72,8 @@ namespace Abp.Zero.Redis.PerRequestRedisCache
             var context1 = GetNewContextSubstitute();
             var context2 = GetNewContextSubstitute();
 
+            RedisDatabase.ClearReceivedCalls();
+            
             CurrentHttpContext = context1;
             var allStrings = _multiTenantLocalizationDictionary.GetAllStrings(null); //should request db
 
@@ -82,6 +92,7 @@ namespace Abp.Zero.Redis.PerRequestRedisCache
         [Fact]
         public void Should_Application_Language_Manager_Request_Once_For_Same_Context()
         {
+            RedisDatabase.ClearReceivedCalls();
             ChangeHttpContext();
 
             var languages = _applicationLanguageManager.GetLanguages(null);
@@ -93,6 +104,7 @@ namespace Abp.Zero.Redis.PerRequestRedisCache
         [Fact]
         public void Should_Application_Language_Manager_Request_Again_If_Context_Changed()
         {
+            RedisDatabase.ClearReceivedCalls();
             ChangeHttpContext();
             var languages = _applicationLanguageManager.GetLanguages(null);
 
@@ -107,7 +119,9 @@ namespace Abp.Zero.Redis.PerRequestRedisCache
         {
             var context1 = GetNewContextSubstitute();
             var context2 = GetNewContextSubstitute();
-
+            
+            RedisDatabase.ClearReceivedCalls();
+            
             CurrentHttpContext = context1;
             var languages = _applicationLanguageManager.GetLanguages(null); //should request db
 

@@ -19,22 +19,22 @@ namespace Abp.Zero.Redis.PerRequestRedisCache
         protected override void PreInitialize()
         {
             CurrentHttpContext = GetNewContextSubstitute();
-            
-            var httpContextAccessor = Substitute.For<IHttpContextAccessor>();
-            httpContextAccessor.HttpContext.Returns(info => CurrentHttpContext);
-
-            LocalIocManager.IocContainer.Register(Component.For<IHttpContextAccessor>().Instance(httpContextAccessor).LifestyleSingleton().IsDefault());
 
             RedisDatabase = Substitute.For<IDatabase>();
+            
             var redisDatabaseProvider = Substitute.For<IAbpRedisCacheDatabaseProvider>();
-
             redisDatabaseProvider.GetDatabase().Returns(RedisDatabase);
-
+            
             LocalIocManager.IocContainer.Register(Component.For<IAbpRedisCacheDatabaseProvider>().Instance(redisDatabaseProvider).LifestyleSingleton().IsDefault());
         }
 
         protected PerRequestRedisCacheTestsBase()
         {
+            var httpContextAccessor = Substitute.For<IHttpContextAccessor>();
+            httpContextAccessor.HttpContext.Returns(info => CurrentHttpContext);
+
+            LocalIocManager.IocContainer.Register(Component.For<IHttpContextAccessor>().Instance(httpContextAccessor).LifestyleSingleton().IsDefault());
+            
             RedisSerializer = LocalIocManager.Resolve<IRedisCacheSerializer>();
         }
         
