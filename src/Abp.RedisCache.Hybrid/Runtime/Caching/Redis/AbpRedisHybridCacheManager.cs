@@ -50,7 +50,7 @@ namespace Abp.RedisCache.Hybrid.Runtime.Caching.Redis
 
                     if (cache != null)
                     {
-                        var castedCache = (AbpRedisInMemoryCache)cache;
+                        var castedCache = (AbpRedisHybridCache)cache;
 
                         if (value.ToString().Trim() == "set")
                         {
@@ -105,7 +105,7 @@ namespace Abp.RedisCache.Hybrid.Runtime.Caching.Redis
         {
             this.Logger.Debug($"CreateCacheImplementation|{name}");
 
-            return new AbpRedisInMemoryCache(IocManager, name)
+            return new AbpRedisHybridCache(IocManager, name)
             {
                 Logger = Logger
             };

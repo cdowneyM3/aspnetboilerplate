@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>5.3.0</Version>
+    <Authors>Cyrus Downey</Authors>
+    <Company>CCOK</Company>
+    <Description>ASP.NET Boilerplate - Redis cache Hybrid implementation uses in memory as well as redis.</Description>
+    <PackageProjectUrl>http://www.aspnetboilerplate.com/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/aspnetboilerplate/aspnetboilerplate</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
