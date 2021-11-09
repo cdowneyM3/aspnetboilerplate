@@ -2,7 +2,7 @@
 
 	dotnet nuget list source
 	dotnet nuget remove source Nexus
-	dotnet nuget add source "https://pkgs.dev.azure.com/ccok/Nexus/_packaging/Nexus/nuget/v3/index.json" --name Nexus --username "cdowney" --password "2ujo3wqu4hu6avdh6xnbolwprlknt5n2x5acjnn5jhqucixfbi5a"
+	dotnet nuget add source "https://pkgs.dev.azure.com/ccok/Nexus/_packaging/Nexus/nuget/v3/index.json" --name Nexus --username "cdowney" --password ""
 
 	replace <UserUserName> with your user name
 	replace <YourPAT> with your personal access tokens
