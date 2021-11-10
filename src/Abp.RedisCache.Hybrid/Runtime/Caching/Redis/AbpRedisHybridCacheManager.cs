@@ -29,6 +29,24 @@ namespace Abp.RedisCache.Hybrid.Runtime.Caching.Redis
             this.SetupEvents();
         }
 
+        protected override ICache CreateCacheImplementation(string name)
+        {
+            this.Logger.Debug($"CreateCacheImplementation|{name}");
+
+            return new AbpRedisHybridCache(IocManager, name)
+            {
+                Logger = Logger
+            };
+        }
+
+        protected override void DisposeCaches()
+        {
+            foreach (var cache in Caches)
+            {
+                cache.Value.Dispose();
+            }
+        }
+
         private ConnectionMultiplexer CreateConnectionMultiplexer()
         {
             return ConnectionMultiplexer.Connect(_options.ConnectionString);
@@ -99,24 +117,6 @@ namespace Abp.RedisCache.Hybrid.Runtime.Caching.Redis
             }
 
             return cacheFound;
-        }
-
-        protected override ICache CreateCacheImplementation(string name)
-        {
-            this.Logger.Debug($"CreateCacheImplementation|{name}");
-
-            return new AbpRedisHybridCache(IocManager, name)
-            {
-                Logger = Logger
-            };
-        }
-
-        protected override void DisposeCaches()
-        {
-            foreach (var cache in Caches.Values)
-            {
-                cache.Dispose();
-            }
         }
     }
 }

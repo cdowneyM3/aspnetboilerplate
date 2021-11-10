@@ -10,6 +10,7 @@ namespace Abp.RedisCache.Hybrid.Runtime.Caching.Redis
     {
         private readonly AbpMemoryCache _memoryCache;
         private readonly AbpRedisCache _redisCache;
+        private readonly IIocManager _iocManager;
 
         public AbpRedisHybridCache(IIocManager iocManager, string name) : base(name)
         {
@@ -17,8 +18,8 @@ namespace Abp.RedisCache.Hybrid.Runtime.Caching.Redis
             {
                 Logger = Logger
             };
-
-            _redisCache = iocManager.Resolve<AbpRedisCache>(new { name });
+            _iocManager = iocManager;
+            _redisCache = _iocManager.Resolve<AbpRedisCache>(new { name });
         }
 
         public override object GetOrDefault(string key)
@@ -66,7 +67,7 @@ namespace Abp.RedisCache.Hybrid.Runtime.Caching.Redis
         {
             this.Logger.Debug($"Dispose|{this.Name}");
             _memoryCache.Dispose();
-            _redisCache.Dispose();
+            _iocManager.Release(_redisCache);
             base.Dispose();
         }
 

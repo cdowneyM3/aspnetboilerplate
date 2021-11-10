@@ -16,3 +16,8 @@
 Execute these commands from the root folder of the Abp.RedisCache.Hybrid project.
 	dotnet pack Abp.RedisCache.Hybrid.csproj --output nupkgs
 	dotnet nuget push --source "Nexus" --api-key na nupkgs\Abp.RedisCache.Hybrid.5.3.0.nupkg
+
+
+
+Other Redis Tools
+	https://joeferner.github.io/redis-commander/
