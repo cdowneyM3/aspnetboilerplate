@@ -25,7 +25,7 @@ namespace Abp.RedisCache.Hybrid.Runtime.Caching.Redis
             IocManager = iocManager;
 
             IocManager.RegisterIfNot<AbpRedisCache>(DependencyLifeStyle.Transient);
-
+            this.Logger.Debug($"AbpRedisHybridCacheManager ctor called");
             this.SetupEvents();
         }
 
