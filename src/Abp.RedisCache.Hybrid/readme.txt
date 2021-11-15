@@ -11,11 +11,13 @@
 		https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=preview-page
 
 
-
+Before Publishing
+	Update the version number of the project under
+		Project Properties -> Package -> Package Version
 
 Execute these commands from the root folder of the Abp.RedisCache.Hybrid project.
 	dotnet pack Abp.RedisCache.Hybrid.csproj --output nupkgs
-	dotnet nuget push --source "Nexus" --api-key na nupkgs\Abp.RedisCache.Hybrid.5.3.0.nupkg
+	dotnet nuget push --source "Nexus" --api-key na nupkgs\Abp.RedisCache.Hybrid.5.3.1.nupkg
 
 
 
