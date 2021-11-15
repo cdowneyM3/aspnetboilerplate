@@ -134,3 +134,4 @@ src/.vs/config/applicationhost.config
 !SQLite.Interop.dll
 nupkg/push-hikalkan.bat
 doc/api/help
+/src/Abp.RedisCache.Hybrid/nupkgs/Abp.RedisCache.Hybrid.5.3.1.nupkg

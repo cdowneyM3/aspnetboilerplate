@@ -2,7 +2,7 @@
 
 	dotnet nuget list source
 	dotnet nuget remove source Nexus
-	dotnet nuget add source "https://pkgs.dev.azure.com/ccok/Nexus/_packaging/Nexus/nuget/v3/index.json" --name Nexus --username "cdowney" --password ""
+	dotnet nuget add source "https://pkgs.dev.azure.com/ccok/Nexus/_packaging/Nexus/nuget/v3/index.json" --name Nexus --username "<UserUserName>" --password "<YourPAT>"
 
 	replace <UserUserName> with your user name
 	replace <YourPAT> with your personal access tokens
@@ -14,6 +14,7 @@
 Before Publishing
 	Update the version number of the project under
 		Project Properties -> Package -> Package Version
+
 
 Execute these commands from the root folder of the Abp.RedisCache.Hybrid project.
 	dotnet pack Abp.RedisCache.Hybrid.csproj --output nupkgs
