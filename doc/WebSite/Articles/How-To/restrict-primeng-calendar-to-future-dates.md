@@ -1,6 +1,6 @@
 ## Introduction
 
-This guide explains how to configure a PrimeNG p-calendar component to only allow future dates selection. This is useful for expiration dates, appointment scheduling, or any scenario where past dates should not be selectable.
+This guide explains how to configure a PrimeNG p-calendar component to only allow future date selection. This is useful for expiration dates, appointment scheduling, or any scenario where past dates should not be selectable.
 
 ## Implementation
 
